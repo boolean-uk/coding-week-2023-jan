@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Week - Codigotchi</title>
-
-    <!-- Manifest -->
-    <link rel="manifest" href="site.webmanifest" />
-
-    <!-- Icon Tab Browser -->
-    <link rel="icon" href="images/icon.png" />
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
-    <!-- CSS -->
+    <!-- Add stylesheet -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- JavaScript -->
+    <!-- Add JS -->
     <script defer src="script.js"></script>
+
+    <title>Codigotchi</title>
 </head>
-
 <body>
-
+    
     <div class="container">
+
+        <!-- Add header -->
         <header>
-            <img src="images/logo.png" alt="Coding Week Logo">
+            <img src="images/logo.png" alt="Logo" />
         </header>
 
+        <!-- Add main section -->
         <main>
-            <!-- Codigotchi and its screen -->
+
+            <!-- Add the codigotchi and its screen -->
             <section class="codigotchi">
-                <img src="images/codigotchi.png" alt="">
+                <img src="images/codigotchi.png" />
                 <div id="screen" class="codigotchi-screen"></div>
             </section>
 
-            <!-- Panels -->
+            <!-- Add control elements -->
             <section id="panels-data" class="panels">
-                <!-- Microphone Panel -->
+
+                <!-- Microphone controls -->
                 <div class="panel panel-microphone">
                     <button id="microphone">
-                        <img src="images/mic.png" alt="microphone">
+                        <img src="images/mic.png" />
                     </button>
-                    <h2>Activate microphone</h2>
+                    <h2>Activate Microphone</h2>
                 </div>
 
-                <!-- Command Panel -->
+                <!-- Commands -->
                 <div class="panel panel-commands">
-                    <h2>Speak one of the commands below!</h2>
+                    <h2>Speak a command!</h2>
                     <h3>Supported Commands</h3>
+                    
                     <div class="commands">
                         <ul>
                             <li>Eat</li>
@@ -61,13 +60,15 @@
                         </ul>
                     </div>
                 </div>
+
             </section>
 
             <!-- Transcript -->
             <p id="transcript"></p>
+
         </main>
+
     </div>
 
 </body>
-
 </html>

@@ -1,59 +1,65 @@
-// REMEMBER: use Chrome browser. Speech Recognition API is non-standard.
-// Provide default value
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
 // Query the page for elements
-const micBtn = document.getElementById('microphone');
-const screen = document.getElementById('screen');
-const panelsData = document.getElementById('panels-data');
-const transcript = document.getElementById('transcript');
+const micBtn = document.getElementById('microphone')
+const panelsData = document.getElementById('panels-data')
+const transcript = document.getElementById('transcript')
+const screen = document.getElementById('screen')
 
-const commands = ['eat', 'dance', 'sleep'];
+const commands = ['eat', 'sleep', 'dance']
 
-// Initialisation
-const recognition = new SpeechRecognition();
+// Set a default SpeechRecognition browser library to use
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
+// Build the speech recognition library
+const recognition = new SpeechRecognition()
+
+// When button clicked, show the available commands
 function onStartListening() {
-    recognition.start();
-    panelsData.classList.add('listening');
+    // Start listening to the microphone
+    recognition.start()
+
+    // Show the available commands
+    panelsData.classList.add('listening')
 }
 
-function onResult(e) {
-    panelsData.classList.remove('listening');
+// When finished speaking, run this function
+function onResult(event) {
+    // Hide the available commands
+    panelsData.classList.remove('listening')
 
-    // retrieve the transcribed speech
-    const text = e.results[0][0].transcript;
-    // update the page with the transcript
-    transcript.textContent = `You said: '${text}'`;
+    // Get the words we spoke
+    const text = event.results[0][0].transcript
 
-    // find if the command is available
-    const action = commands.find(function(cmd) {
-        return text.toLowerCase().includes(cmd);
-    });
+    // Add what we spoke to the transcript HTML element for visibility
+    transcript.textContent = `You said: ${text}`
 
-    let actionClassname
-    // if the action was found, apply the CSS rule by class
+    // Look at my list of commands
+    // Try to find one that matches the word spoken
+    const action = commands.find(function (command) {
+        return text.toLowerCase().includes(command)
+    })
+
+    // If it matches an available command, add a relevant CSS class
+
     if (action) {
-      actionClassname = 'codigotchi-screen_' + action;
-
-      screen.classList.add(actionClassname);
+        // You spoke a valid command
+        screen.classList.add(`codigotchi-screen_${action}`)
     } else {
-      // show user message saying it's not valid
-      transcript.textContent += ' - not a valid command!';
+        // You said something off-script!
+        transcript.textContent += ' - not a valid command!'
     }
 
-    // Show GIFs for 2seconds
-    // then reset the message area
-    setTimeout(function() {
-        screen.classList.remove(actionClassname);
-        transcript.innerText = '';
-    }, 2000);
+    // Show the animated GIF for 2 seconds, then remove the css class added
+    setTimeout(function () {
+        screen.classList.remove(`codigotchi-screen_${action}`)
+        transcript.innerText = ''
+    }, 3000)
 }
 
-function onError(e) {
-    console.error(e.error);
+// If anything goes wrong (it shouldn't), let us know in the console
+function onError(event) {
+    console.error(event.error)
 }
 
-micBtn.addEventListener('click', onStartListening);
-recognition.addEventListener('result', onResult);
-recognition.addEventListener('error', onError);
+micBtn.addEventListener('click', onStartListening)
+recognition.addEventListener('result', onResult)
+recognition.addEventListener('error', onError)
